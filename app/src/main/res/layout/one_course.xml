@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- RecyclerView内部の1行のレイアウト。これが繰り返される -->
+
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardBackgroundColor="@color/colorCourseList"
+    app:cardCornerRadius="8dp"
+    app:cardElevation="2dp"
+    app:cardUseCompatPadding="true">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/courseNameText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="4dp"
+            android:text="ヤビツ峠"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/courseLengthText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="4dp"
+            android:text="距離"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/courseLengthText2"
+            app:layout_constraintTop_toBottomOf="@+id/coursePrefText" />
+
+        <TextView
+            android:id="@+id/courseLengthText3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/oneLengthUnitText"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            app:layout_constraintBaseline_toBaselineOf="@+id/courseLengthText"
+            app:layout_constraintStart_toEndOf="@+id/courseLengthText" />
+
+        <TextView
+            android:id="@+id/courseLengthText5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/oneHeightUnitText"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            app:layout_constraintBaseline_toBaselineOf="@+id/courseHeightLabelText"
+            app:layout_constraintStart_toEndOf="@+id/courseHeightText" />
+
+        <TextView
+            android:id="@+id/courseGradeUnitText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/oneGradeUnitText"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            app:layout_constraintBaseline_toBaselineOf="@+id/courseHeightLabelText"
+            app:layout_constraintStart_toEndOf="@+id/courseGradeText" />
+
+        <TextView
+            android:id="@+id/courseLengthText2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/oneLengthText"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            app:layout_constraintBaseline_toBaselineOf="@+id/courseLengthText"
+            app:layout_constraintStart_toStartOf="@+id/courseNameText" />
+
+        <TextView
+            android:id="@+id/courseHeightLabelText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:text="@string/oneHeightText"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            app:layout_constraintBaseline_toBaselineOf="@+id/courseLengthText"
+            app:layout_constraintStart_toEndOf="@+id/courseLengthText3" />
+
+        <TextView
+            android:id="@+id/courseGradeLabelText"
+            android:layout_width="wrap_content"
+            android:layout_height="19dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:text="@string/oneGradeText"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            app:layout_constraintBaseline_toBaselineOf="@+id/courseLengthText"
+            app:layout_constraintStart_toEndOf="@+id/courseLengthText5" />
+
+        <TextView
+            android:id="@+id/courseHeightText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="標高"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            app:layout_constraintBaseline_toBaselineOf="@+id/courseHeightLabelText"
+            app:layout_constraintStart_toEndOf="@+id/courseHeightLabelText" />
+
+        <TextView
+            android:id="@+id/courseGradeText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="勾配"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            app:layout_constraintBaseline_toBaselineOf="@+id/courseGradeLabelText"
+            app:layout_constraintStart_toEndOf="@+id/courseGradeLabelText" />
+
+        <TextView
+            android:id="@+id/coursePrefText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:text="神奈川県"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/courseNameText" />
+
+        <Button
+            android:id="@+id/courseEditBtn"
+            android:layout_width="60dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:background="@android:drawable/btn_default_small"
+            android:text="編集"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/courseStartText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:text="名古木交差点"
+            app:layout_constraintBaseline_toBaselineOf="@+id/coursePrefText"
+            app:layout_constraintStart_toEndOf="@+id/coursePrefText" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>

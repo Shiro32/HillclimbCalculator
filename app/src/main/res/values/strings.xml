@@ -1,0 +1,84 @@
+<resources>
+    <string name="app_name">ヒルクライム計算機</string>
+    <string name="copyright_text">v1.0 Copyright ©2020 Shiro, <a href="http://fotopota.sakuraweb.com">フォトポタ日記2.0</a></string>
+    <string name="bodyWeight_text">ライダー体重</string>
+    <string name="bodyWeight_hint">体重</string>
+    <string name="bodyWeight_unit">kg</string>
+    <string name="bikeWeight_text">バイク重量</string>
+    <string name="avePower_text">平均パワー</string>
+    <string name="avePower_hint">平均パワー</string>
+    <string name="avePowet_unit">W</string>
+    <string name="bikeWeight_hint">バイク</string>
+
+    <string name="goalTime_text">ゴールタイム</string>
+    <string name="goalTimeHour_hint">時間</string>
+    <string name="goalTimeHour_unit">時間</string>
+    <string name="goalTimeMin_hint">分</string>
+    <string name="goalTimeMin_unit">分</string>
+    <string name="goalTimeSec_hint">秒</string>
+    <string name="goalTimeSec_unit">秒</string>
+    <string name="recalcBtn">計算</string>
+
+    <string name="blacketAdjuster_text">ブラケット補正</string>
+    <string name="blacketAdjuster_hint">1.25程度</string>
+
+    <string name="highAdjuster_text">高地補正</string>
+    <string name="highAdjuster_hint">0.725程度</string>
+
+    <string name="rollingAdjuster_text">転がり係数</string>
+    <string name="rollingAdjuster_hint">0.00421</string>
+    <string name="bodyHeight_text">ライダー身長</string>
+    <string name="bodyHeight_hint">身長</string>
+    <string name="bodyHeight_unit">cm</string>
+    <string name="Help_text">「計算」を押すと、他の数字から算出し直してくれます。体重・重量の逆算は誤差大きめです m(_ _)m</string>
+    <string name="courseLength_text">コース距離</string>
+    <string name="courseLength_hint">距離</string>
+
+    <string name="courseLengthUnit_text">m</string>
+
+    <string name="courseHeight_text">コース標高差</string>
+    <string name="courseHeight_hint">標高差</string>
+    <string name="courseHeightUnit_text">m</string>
+    <string name="detailsHelp_text">以下は別コースや超高級タイヤなどの際に変更してみてください。（画面が隠れてるときは下へスクロールしてください）</string>
+    <string name="blacketAdjuster_default">（初期値:1.25）</string>
+    <string name="highAdjuster_default">（初期値:0.752）</string>
+    <string name="rollingAdjuster_default">（初期値:0.00421）</string>
+
+    <string name="bodyWeightCaution_msg">ダイエットだけでは、目標タイムに届かなさそうです（＞＜）</string>
+    <string name="bikeWeightCaution_msg">バイク計量化だけでは、目標タイムに届かなさそうです（＞＜）</string>
+    <string name="title_activity_course">ヒルクライムコース一覧</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="title_activity_course_list">CourseListActivity</string>
+    <string name="selectCourseBtn">リストから選択</string>
+
+    <string name="courseEditLengthText">コース長</string>
+    <string name="courseEditHeightText">標高差</string>
+    <string name="courseEditPrefText">所在地</string>
+    <string name="courseEditNameText">コース名</string>
+    <string name="courseEditStartText">スタート地点</string>
+    <string name="courseEditSaveBtn">保存</string>
+    <string name="courseEditDeleteBtn">削除</string>
+
+    <string name="oneNameText">コース名：</string>
+    <string name="onePrefText">所在地：</string>
+    <string name="oneLengthText">距離：</string>
+    <string name="oneLengthUnitText">m</string>
+    <string name="oneHeightText">標高差：</string>
+    <string name="oneHeightUnitText">m</string>
+    <string name="courseEditHelpText">任意の名前・距離・標高差でコースを登録できます。保存・変更する場合は「保存」、削除する場合は「削除」、キャンセルの場合は「戻る」ボタンをタップしてください。</string>
+    <string name="courseName_text">現在：</string>
+    <string name="oneGradeText">平均勾配：</string>
+    <string name="oneGradeUnitText">%</string>
+    <string name="help_top">ヒルクライム計算機</string>
+    <string name="aboutOkBtnText">了解</string>
+    <string name="courseEditCanselBtn">キャンセル</string>
+    <string name="courseGradeLabel">平均勾配</string>
+    <string name="courseGradeUnit">%</string>
+</resources>

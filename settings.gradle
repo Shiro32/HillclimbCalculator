@@ -1,0 +1,2 @@
+rootProject.name='HillClimbCalculator'
+include ':app'
