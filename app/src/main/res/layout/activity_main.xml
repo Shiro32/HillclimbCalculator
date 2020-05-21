@@ -596,8 +596,19 @@
         android:layout_height="wrap_content"
         android:text="@string/copyright_text"
         android:textAppearance="@style/TextAppearance.AppCompat.Small"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/ppText"
         app:layout_constraintEnd_toStartOf="@+id/AllScreenScroll"
         app:layout_constraintStart_toEndOf="@+id/AllScreenScroll" />
+
+    <TextView
+        android:id="@+id/ppText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="テキストだけどでない"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        android:textSize="10sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

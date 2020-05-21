@@ -96,7 +96,11 @@ class MainActivity : AppCompatActivity() {
         copyRightText.setText(Html.fromHtml("v1.0 Copyright ©2020 Shiro, <a href=\"http://fotopota.sakuraweb.com\">フォトポタ日記2.0</a>"))
         copyRightText.movementMethod = LinkMovementMethod.getInstance()
 
-//        Toast.makeText(applicationContext, "MainのOnCreate", Toast.LENGTH_LONG).show()
+        // privacy policyにURLを埋め込む
+        ppText.setText(Html.fromHtml("<a href=\"http://fotopota.sakuraweb.com/privacy-hhc.html\">プライバシーポリシー</a>"))
+        ppText.movementMethod = LinkMovementMethod.getInstance()
+
+//      Toast.makeText(applicationContext, "MainのOnCreate", Toast.LENGTH_LONG).show()
     }
     // onCreate
 
