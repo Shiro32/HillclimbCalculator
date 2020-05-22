@@ -19,8 +19,8 @@
     <string name="goalTimeSec_unit">秒</string>
     <string name="recalcBtn">計算</string>
 
-    <string name="blacketAdjuster_text">ブラケット補正</string>
-    <string name="blacketAdjuster_hint">1.25程度</string>
+    <string name="posAdjuster_text">乗車姿勢補正</string>
+    <string name="posAdjuster_hint">1.25程度</string>
 
     <string name="highAdjuster_text">高地補正</string>
     <string name="highAdjuster_hint">0.725程度</string>
@@ -40,7 +40,7 @@
     <string name="courseHeight_hint">標高差</string>
     <string name="courseHeightUnit_text">m</string>
     <string name="detailsHelp_text">以下は別コースや超高級タイヤなどの際に変更してみてください。（画面が隠れてるときは下へスクロールしてください）</string>
-    <string name="blacketAdjuster_default">（初期値:1.25）</string>
+    <string name="posAdjuster_default">（初期値:1.25）</string>
     <string name="highAdjuster_default">（初期値:0.752）</string>
     <string name="rollingAdjuster_default">（初期値:0.00421）</string>
 
@@ -78,7 +78,16 @@
     <string name="oneGradeUnitText">%</string>
     <string name="help_top">ヒルクライム計算機</string>
     <string name="aboutOkBtnText">了解</string>
-    <string name="courseEditCanselBtn">キャンセル</string>
+    <string name="courseEditCancelBtn">キャンセル</string>
     <string name="courseGradeLabel">平均勾配</string>
     <string name="courseGradeUnit">%</string>
+    <string name="posSelectBtn">リストから選択</string>
+    <string name="posHeaderText">乗車姿勢による空気抵抗の変化を補正します。\nロードバイクの基本（＾＾）である下ハンドル時の抵抗を標準（1.0）として、各乗車姿勢による係数を設定します。\nメイン画面では任意の係数を設定することもできます。</string>
+    <string name="posUnderBtnText">下ハンドル（1.0）</string>
+    <string name="posBlacketBtnText">ブラケット（1.25）</string>
+    <string name="posTopBtnText">上ハンドル（1.38）</string>
+    <string name="posDancingBtnText">ダンシング（1.73）</string>
+    <string name="posAeroBtnText">エアロポジション（0.94）</string>
+    <string name="posSaveBtnText">選択</string>
+    <string name="posCancelBtnText">キャンセル</string>
 </resources>

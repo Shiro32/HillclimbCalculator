@@ -1,9 +1,8 @@
 package com.sakuraweb.fotopota.hillclimbcalculator
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
-import android.graphics.Color
-import android.graphics.PorterDuff
 import android.graphics.drawable.Drawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -14,14 +13,14 @@ import android.text.method.LinkMovementMethod
 import android.view.*
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
-import android.widget.TextView
-import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.black_toast_layout.*
 import kotlin.math.asin
 import kotlin.math.cos
 import kotlin.math.round
 import kotlin.math.sqrt
+
+val REQUEST_CODE_COURSE_SELECT = 1
+val REQUEST_CODE_POS_SELECT = 2
 
 // メイン画面クラス
 // 実際にはRealmデータベースの初期化処理などがあるため、これが最初の実行コードではない
@@ -30,19 +29,19 @@ class MainActivity : AppCompatActivity() {
 
     // 計算用に各種要素はローカル変数で持つ
     // TextEdit入力途中の人に対応すべく、結局は、各計算時にTextEdit→ローカル変数への読み込みをやる
-    private var bodyWeight: Double = 0.0
-    private var bodyHeight: Double = 0.0
-    private var bikeWeight: Double = 0.0
-    private var avePower: Double = 0.0
-    private var goalTimeHour: Int = 0
-    private var goalTimeMin: Int = 0
-    private var goalTimeSec: Int = 0
-    private var blacketAdjust: Double = 0.0
-    private var highAdjust: Double = 0.0
-    private var rollingAdjust: Double = 0.0
-    private var courseHeight: Double = 635.0
-    private var courseLength: Double = 11800.0
-    private var courseName: String = " "
+    private var bodyWeight = 0.0
+    private var bodyHeight = 0.0
+    private var bikeWeight = 0.0
+    private var avePower = 0.0
+    private var goalTimeHour = 0
+    private var goalTimeMin = 0
+    private var goalTimeSec = 0
+    private var blacketAdjust = 0.0
+    private var highAdjust = 0.0
+    private var rollingAdjust = 0.0
+    private var courseHeight = 635.0
+    private var courseLength = 11800.0
+    private var courseName = " "
 
     // 以下の２つは計算上の定数
     private val fujii: Double = 0.00007638
@@ -68,28 +67,33 @@ class MainActivity : AppCompatActivity() {
         // 背景点滅用
         defaultBack = bodyWeightEdit.background
 
-        // 画面フォーカス用に
+        // 画面フォーカス制御用
         inputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager        // 入力制御用に入れておく
 
-        // 計算用ボタンのリスナを設定する（このクラス内なので簡単）
+        // 計算用ボタンのリスナを設定する（全部クラス内なので簡単）
         recalcPowerBtn.setOnClickListener() {recalcPower()}
         recalcTimeBtn.setOnClickListener() {recalcGoalTime()}
         recalcBodyWeightBtn.setOnClickListener() {recalcBodyWeight()}
         recalcBikeWeightBtn.setOnClickListener() {recalcBikeWeight()}
 
-        // About画面
+        // About画面リスナ
         imageTitleBtn.setOnClickListener() {
             val intent = Intent(this, AboutActivity::class.java)
             startActivity(intent)
         }
 
-        // コース選択ボタンのリスナを設定
-        // CourseListActivityへ遷移する。特段Intentなしで。
+        // コース選択ボタンリスナ。CourseListActivityへ遷移する。特段Intentなしで。
         courseSelectBtn.setOnClickListener() {
             val intent = Intent(this, CourseListActivity::class.java)
 
             // 結果を戻すことを前提に別Activityを呼び出す。処理は、onActivityResultメソッドで！
-            startActivityForResult(intent, 1)
+            startActivityForResult(intent, REQUEST_CODE_COURSE_SELECT)
+        }
+
+        // ポジション選択ボタンのリスナ
+        posSelectBtn.setOnClickListener() {
+            val intent = Intent( this , PosSelectActivity::class.java)
+            startActivityForResult(intent, REQUEST_CODE_POS_SELECT)
         }
 
         // copyrightメッセージにURLを埋め込む
@@ -100,33 +104,55 @@ class MainActivity : AppCompatActivity() {
         ppText.setText(Html.fromHtml("<a href=\"http://fotopota.sakuraweb.com/privacy-hhc.html\">プライバシーポリシー</a>"))
         ppText.movementMethod = LinkMovementMethod.getInstance()
 
-//      Toast.makeText(applicationContext, "MainのOnCreate", Toast.LENGTH_LONG).show()
     }
-    // onCreate
+    // onCreateおわり
 
+
+    //　他の画面（選択ボタンなど）からの戻りはすべてここで処理
+    // reestCodeで呼び出し元を判定して、処理する
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        // 選択画面からの戻り時はIntentでコースデータを伝えてくるので反映する
-        // ★コース名なども引っ張ってこよう
-        if( resultCode == RESULT_OK) {
-            val l = data?.getStringExtra("length")
-            val h = data?.getStringExtra("height")
-            val n = data?.getStringExtra("name")
+        when (requestCode) {
 
-            if( l!=null && h!=null && n!=null ) {
-                courseLengthEdit.setText(l.toString())
-                courseHeightEdit.setText(h.toString())
-                courseNameText.setText(n.toString())
-                setGradeText()
-                BlackToast(applicationContext, "$n をセットしました")
+            // コースセレクトボタン
+            REQUEST_CODE_COURSE_SELECT -> {
+                if (resultCode == RESULT_OK) {
+                    val l = data?.getStringExtra("length")
+                    val h = data?.getStringExtra("height")
+                    val n = data?.getStringExtra("name")
+
+                    if (l != null && h != null && n != null) {
+                        courseLengthEdit.setText(l.toString())
+                        courseHeightEdit.setText(h.toString())
+                        courseNameText.setText(n.toString())
+                        setGradeText()
+                        BlackToast(applicationContext, "$n をセットしました")
+                    }
+                }
             }
+
+            // ポジション選択ボタン
+            REQUEST_CODE_POS_SELECT -> {
+                if (resultCode == RESULT_OK) {
+                    val n = data?.getStringExtra("name")
+                    val v = data?.getStringExtra( "value" )
+                    if (n != null && v!=null ) {
+                        posAdjustEdit.setText(v.toString())
+                        BlackToast(applicationContext, "$n にセットしました")
+                    }
+                }
+            }
+
+            else -> {}
         }
     }
 
+    // コース距離と標高差から勾配を求めて表示する
+    // 勾配データは保持させないので、距離と標高差に変化があるたびに呼び出されて更新
     private fun setGradeText() {
-        val l:Double = courseLengthEdit.text.toString().toDouble()
-        val h:Double = courseHeightEdit.text.toString().toDouble()
+        val l = courseLengthEdit.text.toString().toDouble()
+        val h = courseHeightEdit.text.toString().toDouble()
 
         courseGrade.setText(
             ((h/l*1000).toInt().toDouble()/10).toString()
@@ -134,12 +160,13 @@ class MainActivity : AppCompatActivity() {
     }
 
     // よその画面から戻ってきたとき（初回起動、コース選択画面からの戻り）
+    // 最初、ここでいろいろやらせてたけど間違い。onActivityResultでやらせるのが正解
     override fun onResume() {
         super.onResume()
     }
 
 
-    // アプリの実質的な終了処理
+    // アプリの実質的な終了処理（意外だけど、destroyではない）
     // プリファレンスにデータを書き込む
     override fun onPause() {
         super.onPause()
@@ -150,16 +177,12 @@ class MainActivity : AppCompatActivity() {
     // 入力箇所（EditText）以外をタップしたときに、フォーカスをオフにする
     override fun dispatchTouchEvent(ev: MotionEvent?): Boolean {
         clearFocus()
-
         return super.dispatchTouchEvent(ev)
-
     }
 
-
-
      private fun clearFocus() {
+        // 画面更新があるはずなので、ここで勾配データも再表示しておく
         setGradeText()
-
          // キーボードを隠す
         inputMethodManager.hideSoftInputFromWindow(contentLayoutBase.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS)
         // 背景にフォーカスを移す
@@ -180,7 +203,7 @@ class MainActivity : AppCompatActivity() {
         if(!goalTimeHourEdit.text.toString().equals("")) goalTimeHour = goalTimeHourEdit.text.toString().toInt() else goalTimeHour = 0
         if(!goalTimeMinEdit.text.toString().equals("")) goalTimeMin = goalTimeMinEdit.text.toString().toInt() else goalTimeMin = 0
         if(!goalTimeSecEdit.text.toString().equals("")) goalTimeSec = goalTimeSecEdit.text.toString().toInt() else goalTimeSec = 0
-        if(!blacketAdjustEdit.text.toString().equals("")) blacketAdjust = blacketAdjustEdit.text.toString().toDouble() else blacketAdjust = 0.0
+        if(!posAdjustEdit.text.toString().equals("")) blacketAdjust = posAdjustEdit.text.toString().toDouble() else blacketAdjust = 0.0
         if(!highAdjustEdit.text.toString().equals("")) highAdjust = highAdjustEdit.text.toString().toDouble() else highAdjust = 0.0
         if(!rollingAdjustEdit.text.toString().equals("")) rollingAdjust = rollingAdjustEdit.text.toString().toDouble() else rollingAdjust = 0.0
         if(!courseLengthEdit.text.toString().equals("")) courseLength = courseLengthEdit.text.toString().toDouble() else courseLength = 0.0
@@ -214,7 +237,7 @@ class MainActivity : AppCompatActivity() {
             goalTimeHourEdit.setText(goalTimeHour.toString())
             goalTimeMinEdit.setText(goalTimeMin.toString())
             goalTimeSecEdit.setText(goalTimeSec.toString())
-            blacketAdjustEdit.setText(blacketAdjust.toString())
+            posAdjustEdit.setText(blacketAdjust.toString())
             highAdjustEdit.setText(highAdjust.toString())
             rollingAdjustEdit.setText(rollingAdjust.toString())
             courseLengthEdit.setText(courseLength.toString())
@@ -230,7 +253,6 @@ class MainActivity : AppCompatActivity() {
     // 共用プリファレンスに諸設定データを書き出す
     // なんだかんだ言って、EditTextがその時点での最新値なので、EditTextから読んで書き出す
     private fun saveDataToPref() {
-
         // textEditから数字を読みだす。もしかすると、これを経由しないで、直接、TEditTextから書いていいかも
         loadDataFromEdit()
 
@@ -403,4 +425,4 @@ class MainActivity : AppCompatActivity() {
         highlightEdit(goalTimeHourEdit, goalTimeMinEdit,goalTimeSecEdit)
     }
 
-}
+} // MainActivityクラス

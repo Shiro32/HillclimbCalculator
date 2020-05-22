@@ -56,7 +56,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
-                        android:layout_marginTop="8dp"
+                        android:layout_marginTop="2dp"
                         android:layout_marginEnd="8dp"
                         android:text="@string/Help_text"
                         android:textAppearance="@style/TextAppearance.AppCompat.Small"
@@ -469,7 +469,7 @@
                         android:selectAllOnFocus="true"
                         android:textAppearance="@style/TextAppearance.AppCompat.Small"
                         app:layout_constraintStart_toEndOf="@+id/bodyHeightText"
-                        app:layout_constraintStart_toStartOf="@+id/blacketAdjustEdit"
+                        app:layout_constraintStart_toStartOf="@+id/posAdjustEdit"
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
@@ -503,42 +503,34 @@
                         android:selectAllOnFocus="true"
                         android:textAppearance="@style/TextAppearance.AppCompat.Small"
                         app:layout_constraintBaseline_toBaselineOf="@+id/highAdjustText"
-                        app:layout_constraintStart_toEndOf="@+id/blacketAdjustText" />
+                        app:layout_constraintStart_toEndOf="@+id/posAdjustText" />
 
                     <EditText
-                        android:id="@+id/blacketAdjustEdit"
+                        android:id="@+id/posAdjustEdit"
                         android:layout_width="60dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
                         android:layout_marginLeft="8dp"
                         android:ems="10"
                         android:gravity="right"
-                        android:hint="@string/blacketAdjuster_hint"
+                        android:hint="@string/posAdjuster_hint"
                         android:inputType="numberDecimal"
                         android:selectAllOnFocus="true"
                         android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                        app:layout_constraintBaseline_toBaselineOf="@+id/blacketAdjustText"
-                        app:layout_constraintStart_toEndOf="@+id/blacketAdjustText" />
+                        app:layout_constraintBaseline_toBaselineOf="@+id/posAdjustText"
+                        app:layout_constraintStart_toEndOf="@+id/posAdjustText" />
 
                     <TextView
-                        android:id="@+id/blacketAdjustText"
+                        android:id="@+id/posAdjustText"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
                         android:layout_marginLeft="8dp"
                         android:layout_marginTop="8dp"
-                        android:text="@string/blacketAdjuster_text"
+                        android:text="@string/posAdjuster_text"
                         android:textAppearance="@style/TextAppearance.AppCompat.Small"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/rollingAdjustText" />
-
-                    <TextView
-                        android:id="@+id/blacketAdjustDefaultText"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/blacketAdjuster_default"
-                        app:layout_constraintBaseline_toBaselineOf="@+id/blacketAdjustEdit"
-                        app:layout_constraintStart_toEndOf="@+id/blacketAdjustEdit" />
 
                     <TextView
                         android:id="@+id/rollingAdjustText"
@@ -569,6 +561,18 @@
                         app:layout_constraintEnd_toEndOf="parent"
                         app:srcCompat="@drawable/fight_man" />
 
+                    <Button
+                        android:id="@+id/posSelectBtn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginLeft="8dp"
+                        android:minHeight="0dp"
+                        android:text="@string/posSelectBtn"
+                        android:textSize="10sp"
+                        app:layout_constraintBaseline_toBaselineOf="@+id/posAdjustEdit"
+                        app:layout_constraintStart_toEndOf="@+id/posAdjustEdit" />
+
                     <EditText
                         android:id="@+id/rollingAdjustEdit"
                         android:layout_width="60dp"
@@ -582,7 +586,7 @@
                         android:selectAllOnFocus="true"
                         android:textAppearance="@style/TextAppearance.AppCompat.Small"
                         app:layout_constraintBaseline_toBaselineOf="@+id/rollingAdjustText"
-                        app:layout_constraintStart_toEndOf="@+id/blacketAdjustText" />
+                        app:layout_constraintStart_toEndOf="@+id/posAdjustText" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.cardview.widget.CardView>
