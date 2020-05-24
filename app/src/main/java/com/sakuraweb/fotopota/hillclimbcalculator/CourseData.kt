@@ -18,6 +18,4 @@ open class CourseData : RealmObject() {
     var start: String = "start"
     var length: Long = 0
     var height: Long = 0
-
-
 }

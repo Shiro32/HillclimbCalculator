@@ -17,7 +17,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:title="乗車姿勢補正設定" />
+        app:title="乗車姿勢による空気抵抗補正設定" />
 
     <TextView
         android:id="@+id/posHeaderText"
@@ -118,8 +118,9 @@
         android:layout_height="430dp"
         android:layout_marginTop="16dp"
         android:scaleType="fitStart"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/posCancelBtn"
-        app:srcCompat="@drawable/climbing"
-        tools:layout_editor_absoluteX="24dp" />
+        app:srcCompat="@drawable/climbing" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

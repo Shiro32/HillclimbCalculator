@@ -36,7 +36,7 @@
 
     <string name="courseLengthUnit_text">m</string>
 
-    <string name="courseHeight_text">コース標高差</string>
+    <string name="courseHeight_text">標高差</string>
     <string name="courseHeight_hint">標高差</string>
     <string name="courseHeightUnit_text">m</string>
     <string name="detailsHelp_text">以下は別コースや超高級タイヤなどの際に変更してみてください。（画面が隠れてるときは下へスクロールしてください）</string>
@@ -82,7 +82,7 @@
     <string name="courseGradeLabel">平均勾配</string>
     <string name="courseGradeUnit">%</string>
     <string name="posSelectBtn">リストから選択</string>
-    <string name="posHeaderText">乗車姿勢による空気抵抗の変化を補正します。\nロードバイクの基本（＾＾）である下ハンドル時の抵抗を標準（1.0）として、各乗車姿勢による係数を設定します。\nメイン画面では任意の係数を設定することもできます。</string>
+    <string name="posHeaderText">姿勢による空気抵抗増減を、ロードバイクの基本（＾＾）である下ハンドル時の抵抗を標準（1.0）として補正設定します。\nメイン画面では任意の係数を設定することもできます。\nまぁ、ヒルクライムなのでそんなに影響ないですけど・・・</string>
     <string name="posUnderBtnText">下ハンドル（1.0）</string>
     <string name="posBlacketBtnText">ブラケット（1.25）</string>
     <string name="posTopBtnText">上ハンドル（1.38）</string>
@@ -90,4 +90,19 @@
     <string name="posAeroBtnText">エアロポジション（0.94）</string>
     <string name="posSaveBtnText">選択</string>
     <string name="posCancelBtnText">キャンセル</string>
+    <string name="tireCRRLabel">転がり抵抗：</string>
+    <string name="title_activity_tire_list">TireListActivity</string>
+    <string name="tireEditHeader">タイヤ転がり抵抗編集画面です。転がり係数は、有名な「Bicycle Rolling Resistance」あたりを参考に入力してみてください。</string>
+    <string name="tireMakerText">メーカー</string>
+    <string name="tireNameLabel">タイヤ</string>
+    <string name="tireCRRText">転がり抵抗</string>
+    <string name="tireCRRUnit">（単位分からず）</string>
+    <string name="tirePressLabel">空気圧</string>
+    <string name="tirePressUnit">気圧</string>
+    <string name="tireTypeLabel">タイプ</string>
+    <string name="tireTypeUnit">（TU/TL/CLなど）</string>
+    <string name="tireTU">TU</string>
+    <string name="tireCL">CL</string>
+    <string name="tireTL">TL</string>
+    <string name="tirePressHelp">※上記の転がり抵抗測定時の空気圧</string>
 </resources>

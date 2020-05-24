@@ -1,6 +1,5 @@
 package com.sakuraweb.fotopota.hillclimbcalculator
 
-import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.graphics.drawable.Drawable
@@ -21,6 +20,7 @@ import kotlin.math.sqrt
 
 val REQUEST_CODE_COURSE_SELECT = 1
 val REQUEST_CODE_POS_SELECT = 2
+val REQUEST_CODE_TIRE_SELECT = 3
 
 // メイン画面クラス
 // 実際にはRealmデータベースの初期化処理などがあるため、これが最初の実行コードではない
@@ -96,6 +96,11 @@ class MainActivity : AppCompatActivity() {
             startActivityForResult(intent, REQUEST_CODE_POS_SELECT)
         }
 
+        // タイヤ選択ボタンのリスナ
+        tireSelectBtn.setOnClickListener() {
+            val intent = Intent( this , TireListActivity::class.java)
+            startActivityForResult(intent, REQUEST_CODE_TIRE_SELECT)
+        }
         // copyrightメッセージにURLを埋め込む
         copyRightText.setText(Html.fromHtml("v1.0 Copyright ©2020 Shiro, <a href=\"http://fotopota.sakuraweb.com\">フォトポタ日記2.0</a>"))
         copyRightText.movementMethod = LinkMovementMethod.getInstance()
@@ -127,7 +132,7 @@ class MainActivity : AppCompatActivity() {
                         courseHeightEdit.setText(h.toString())
                         courseNameText.setText(n.toString())
                         setGradeText()
-                        BlackToast(applicationContext, "$n をセットしました")
+                        blackToast(applicationContext, "$n をセットしました")
                     }
                 }
             }
@@ -139,11 +144,22 @@ class MainActivity : AppCompatActivity() {
                     val v = data?.getStringExtra( "value" )
                     if (n != null && v!=null ) {
                         posAdjustEdit.setText(v.toString())
-                        BlackToast(applicationContext, "$n にセットしました")
+                        blackToast(applicationContext, "$n にセットしました")
                     }
                 }
             }
 
+            // タイヤ選択ボタン
+            REQUEST_CODE_TIRE_SELECT -> {
+                if (resultCode == RESULT_OK) {
+                    val n = data?.getStringExtra("name")
+                    val c = data?.getStringExtra( "crr" )
+                    if (n != null && c!=null ) {
+                        rollingAdjustEdit.setText(c.toString())
+                        blackToast(applicationContext, "$n にセットしました")
+                    }
+                }
+            }
             else -> {}
         }
     }
@@ -351,7 +367,7 @@ class MainActivity : AppCompatActivity() {
 
         // 体重がマイナスになってしまった場合の処置
         if (w <= 0) {
-            BlackToast(applicationContext, getString(R.string.bodyWeightCaution_msg))
+            blackToast(applicationContext, getString(R.string.bodyWeightCaution_msg))
         }
     }
 
@@ -373,7 +389,7 @@ class MainActivity : AppCompatActivity() {
 
         // bike重量ががマイナスになってしまった場合の処置
         if (w <= 0) {
-            BlackToast(applicationContext,getString(R.string.bikeWeightCaution_msg))
+            blackToast(applicationContext,getString(R.string.bikeWeightCaution_msg))
         }
     }
 

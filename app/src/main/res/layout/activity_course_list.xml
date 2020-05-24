@@ -12,12 +12,12 @@
         android:theme="@style/AppTheme.AppBarOverlay">
 
         <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
+            android:id="@+id/courseToolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
             app:popupTheme="@style/AppTheme.PopupOverlay"
-            app:title="全世界ヒルクライムコース一覧" />
+            app:title="全国ヒルクライムコース一覧" />
 
     </com.google.android.material.appbar.AppBarLayout>
 

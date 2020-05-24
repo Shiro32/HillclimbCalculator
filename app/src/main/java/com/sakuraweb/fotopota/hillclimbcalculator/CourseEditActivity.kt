@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.view.MotionEvent
 import android.view.View
 import android.view.inputmethod.InputMethodManager
-import android.widget.Toast
 import io.realm.Realm
 import io.realm.kotlin.createObject
 import io.realm.kotlin.where
@@ -119,7 +118,7 @@ class CourseEditActivity : AppCompatActivity() {
                 }
             }
 
-            BlackToast(applicationContext, "保存しましたよ")
+            blackToast(applicationContext, "保存しましたよ")
 
             // アクティビティを閉じる（破棄する）
             finish()
@@ -130,7 +129,7 @@ class CourseEditActivity : AppCompatActivity() {
                 realm.where<CourseData>().equalTo("id", bpId)?.findFirst()?.deleteFromRealm()
             }
 
-            BlackToast(applicationContext, "削除しました")
+            blackToast(applicationContext, "削除しました")
             finish()
         }
 

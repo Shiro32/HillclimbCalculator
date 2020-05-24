@@ -307,10 +307,11 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
                         android:layout_marginLeft="8dp"
+                        android:layout_marginTop="8dp"
                         android:text="@string/courseLength_text"
                         android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                        app:layout_constraintBaseline_toBaselineOf="@+id/courseLengthEdit"
-                        app:layout_constraintStart_toStartOf="parent" />
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
                         android:id="@+id/courseHeightUnitText"
@@ -353,14 +354,16 @@
                         android:inputType="number"
                         android:selectAllOnFocus="true"
                         android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                        app:layout_constraintBaseline_toBaselineOf="@+id/courseLengthText"
                         app:layout_constraintStart_toEndOf="@+id/courseLengthText"
-                        app:layout_constraintStart_toStartOf="@+id/courseHeightEdit"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintStart_toStartOf="@+id/courseHeightEdit" />
 
                     <EditText
                         android:id="@+id/courseHeightEdit"
                         android:layout_width="100dp"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginLeft="16dp"
                         android:ems="10"
                         android:gravity="right"
                         android:hint="@string/courseHeight_hint"
@@ -368,7 +371,7 @@
                         android:selectAllOnFocus="true"
                         android:textAppearance="@style/TextAppearance.AppCompat.Large"
                         app:layout_constraintBaseline_toBaselineOf="@+id/courseHeightLabelText"
-                        app:layout_constraintStart_toEndOf="@+id/courseHeightLabelText" />
+                        app:layout_constraintStart_toEndOf="@+id/courseLengthText" />
 
                     <TextView
                         android:id="@+id/courseNameText"
@@ -443,10 +446,9 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
                         android:layout_marginLeft="8dp"
-                        android:layout_marginTop="8dp"
+                        android:layout_marginTop="4dp"
                         android:text="@string/bodyHeight_text"
                         android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                        app:layout_constraintBaseline_toBaselineOf="@+id/bodyHeightEdit"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
@@ -468,9 +470,9 @@
                         android:inputType="numberDecimal"
                         android:selectAllOnFocus="true"
                         android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                        app:layout_constraintBaseline_toBaselineOf="@+id/bodyHeightText"
                         app:layout_constraintStart_toEndOf="@+id/bodyHeightText"
-                        app:layout_constraintStart_toStartOf="@+id/posAdjustEdit"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintStart_toStartOf="@+id/posAdjustEdit" />
 
                     <TextView
                         android:id="@+id/heightAdjustDefaultText"
@@ -488,7 +490,7 @@
                         android:text="@string/highAdjuster_text"
                         android:textAppearance="@style/TextAppearance.AppCompat.Small"
                         app:layout_constraintStart_toStartOf="@+id/bodyHeightText"
-                        app:layout_constraintTop_toBottomOf="@+id/bodyHeightText" />
+                        app:layout_constraintTop_toBottomOf="@+id/rollingAdjustText" />
 
                     <EditText
                         android:id="@+id/highAdjustEdit"
@@ -530,7 +532,7 @@
                         android:text="@string/posAdjuster_text"
                         android:textAppearance="@style/TextAppearance.AppCompat.Small"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/rollingAdjustText" />
+                        app:layout_constraintTop_toBottomOf="@+id/highAdjustText" />
 
                     <TextView
                         android:id="@+id/rollingAdjustText"
@@ -540,15 +542,7 @@
                         android:text="@string/rollingAdjuster_text"
                         android:textAppearance="@style/TextAppearance.AppCompat.Small"
                         app:layout_constraintStart_toStartOf="@+id/highAdjustText"
-                        app:layout_constraintTop_toBottomOf="@+id/highAdjustText" />
-
-                    <TextView
-                        android:id="@+id/rollingAdjustDefaultText"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/rollingAdjuster_default"
-                        app:layout_constraintBaseline_toBaselineOf="@+id/rollingAdjustEdit"
-                        app:layout_constraintStart_toEndOf="@+id/rollingAdjustEdit" />
+                        app:layout_constraintTop_toBottomOf="@+id/bodyHeightText" />
 
                     <ImageView
                         android:id="@+id/fightImage"
@@ -565,12 +559,24 @@
                         android:id="@+id/posSelectBtn"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginLeft="8dp"
+                        android:layout_marginStart="4dp"
+                        android:layout_marginLeft="4dp"
                         android:minHeight="0dp"
                         android:text="@string/posSelectBtn"
-                        android:textSize="10sp"
+                        android:textSize="12sp"
                         app:layout_constraintBaseline_toBaselineOf="@+id/posAdjustEdit"
+                        app:layout_constraintStart_toEndOf="@+id/posAdjustEdit" />
+
+                    <Button
+                        android:id="@+id/tireSelectBtn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="4dp"
+                        android:layout_marginLeft="4dp"
+                        android:minHeight="0dp"
+                        android:text="@string/posSelectBtn"
+                        android:textSize="12sp"
+                        app:layout_constraintBaseline_toBaselineOf="@+id/rollingAdjustEdit"
                         app:layout_constraintStart_toEndOf="@+id/posAdjustEdit" />
 
                     <EditText

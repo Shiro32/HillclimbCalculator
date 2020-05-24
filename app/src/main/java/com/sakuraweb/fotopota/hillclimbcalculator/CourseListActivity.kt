@@ -1,21 +1,15 @@
 package com.sakuraweb.fotopota.hillclimbcalculator
 
-import android.app.Activity
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.view.MotionEvent
-import android.view.inputmethod.InputMethodManager
-import android.widget.Toast
-import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import io.realm.Realm
+import io.realm.RealmConfiguration
 import io.realm.Sort
 
 import kotlinx.android.synthetic.main.activity_course_list.*
-import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_course_list.*
 
 // コース選択画面（リスト形式から選択や追加）
@@ -35,9 +29,14 @@ class CourseListActivity : AppCompatActivity(), SetCourseListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_course_list)
-        setSupportActionBar(toolbar)
+        setSupportActionBar(courseToolbar)
 
         // realmのインスタンスを作る
+        val config = RealmConfiguration.Builder()
+            .deleteRealmIfMigrationNeeded()
+            .name("course.realm")
+            .build()
+        Realm.setDefaultConfiguration(config)
         realm = Realm.getDefaultInstance()
 
         // 追加ボタン（fab）のリスナを設定する（EditActivity画面を呼び出す）
