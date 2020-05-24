@@ -102,7 +102,7 @@ class MainActivity : AppCompatActivity() {
             startActivityForResult(intent, REQUEST_CODE_TIRE_SELECT)
         }
         // copyrightメッセージにURLを埋め込む
-        copyRightText.setText(Html.fromHtml("v1.0 Copyright ©2020 Shiro, <a href=\"http://fotopota.sakuraweb.com\">フォトポタ日記2.0</a>"))
+        copyRightText.setText(Html.fromHtml("v1.8 Copyright ©2020 Shiro, <a href=\"http://fotopota.sakuraweb.com\">フォトポタ日記2.0</a>"))
         copyRightText.movementMethod = LinkMovementMethod.getInstance()
 
         // privacy policyにURLを埋め込む

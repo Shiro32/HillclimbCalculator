@@ -87,7 +87,7 @@
     <string name="posBlacketBtnText">ブラケット（1.25）</string>
     <string name="posTopBtnText">上ハンドル（1.38）</string>
     <string name="posDancingBtnText">ダンシング（1.73）</string>
-    <string name="posAeroBtnText">エアロポジション（0.94）</string>
+    <string name="posAeroBtnText">エアロバー（0.94）</string>
     <string name="posSaveBtnText">選択</string>
     <string name="posCancelBtnText">キャンセル</string>
     <string name="tireCRRLabel">転がり抵抗：</string>
@@ -105,4 +105,5 @@
     <string name="tireCL">CL</string>
     <string name="tireTL">TL</string>
     <string name="tirePressHelp">※上記の転がり抵抗測定時の空気圧</string>
+    <string name="posAeroHint">まず使わないと思いますが・・・</string>
 </resources>

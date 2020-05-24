@@ -156,7 +156,7 @@ class TireEditActivity : AppCompatActivity() {
 
 
     // 入力箇所（EditText）以外をタップしたときに、フォーカスをオフにする
-    override fun onTouchEvent(event: MotionEvent?): Boolean {
+    override fun dispatchTouchEvent(event: MotionEvent?): Boolean {
         // キーボードを隠す
         inputMethodManager.hideSoftInputFromWindow(
             tireEditLayout.getWindowToken(),
@@ -165,6 +165,6 @@ class TireEditActivity : AppCompatActivity() {
         // 背景にフォーカスを移す
         tireEditLayout.requestFocus()
 
-        return super.onTouchEvent(event)
+        return super.dispatchTouchEvent(event)
     }
 }

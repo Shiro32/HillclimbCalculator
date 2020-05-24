@@ -145,12 +145,12 @@ class CourseEditActivity : AppCompatActivity() {
 
 
     // 入力箇所（EditText）以外をタップしたときに、フォーカスをオフにする
-    override fun onTouchEvent(event: MotionEvent?): Boolean {
+    override fun dispatchTouchEvent(event: MotionEvent?): Boolean {
         // キーボードを隠す
         inputMethodManager.hideSoftInputFromWindow(editLayout.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS)
         // 背景にフォーカスを移す
         editLayout.requestFocus()
 
-        return super.onTouchEvent(event)
+        return super.dispatchTouchEvent(event)
     }
 }
