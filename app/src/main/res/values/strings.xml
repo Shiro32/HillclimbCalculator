@@ -30,7 +30,7 @@
     <string name="bodyHeight_text">ライダー身長</string>
     <string name="bodyHeight_hint">身長</string>
     <string name="bodyHeight_unit">cm</string>
-    <string name="Help_text">「計算」を押すと、他の数字から算出し直してくれます。体重・重量の逆算は誤差大きめです m(_ _)m</string>
+    <string name="Help_text">「計算」を押すと、他の数字から目的の数字を求めてくれます。Let\'s Climb Japan!!</string>
     <string name="courseLength_text">コース距離</string>
     <string name="courseLength_hint">距離</string>
 

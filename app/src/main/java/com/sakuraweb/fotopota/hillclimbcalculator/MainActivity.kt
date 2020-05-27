@@ -102,7 +102,7 @@ class MainActivity : AppCompatActivity() {
             startActivityForResult(intent, REQUEST_CODE_TIRE_SELECT)
         }
         // copyrightメッセージにURLを埋め込む
-        copyRightText.setText(Html.fromHtml("v1.8 Copyright ©2020 Shiro, <a href=\"http://fotopota.sakuraweb.com\">フォトポタ日記2.0</a>"))
+        copyRightText.setText(Html.fromHtml("v2.0 Copyright ©2020 Shiro, <a href=\"http://fotopota.sakuraweb.com\">フォトポタ日記2.0</a>"))
         copyRightText.movementMethod = LinkMovementMethod.getInstance()
 
         // privacy policyにURLを埋め込む
@@ -231,33 +231,33 @@ class MainActivity : AppCompatActivity() {
     private fun loadDataFromPref() {
         // プリファレンスからローカル変数に入れる
         PreferenceManager.getDefaultSharedPreferences(this).apply {
-            bodyWeight      = getString("bodyWeight", "51")!!.toDouble()
+            bodyWeight      = getString("bodyWeight", "60")!!.toDouble()
             bodyHeight      = getString("bodyHeight","175")!!.toDouble()
             bikeWeight      = getString("bikeWeight", "8.5")!!.toDouble()
-            avePower        = getString("avePower", "215")!!.toDouble()
+            avePower        = getString("avePower", "220")!!.toDouble()
             goalTimeHour    = getString("goalTimeHour", "0")!!.toInt()
-            goalTimeMin     = getString("goalTimeMin", "40")!!.toInt()
-            goalTimeSec     = getString("goalTimeSec", "0")!!.toInt()
+            goalTimeMin     = getString("goalTimeMin", "39")!!.toInt()
+            goalTimeSec     = getString("goalTimeSec", "26")!!.toInt()
             blacketAdjust   = getString("blacketAdjust", "1.25")!!.toDouble()
             highAdjust      = getString("highAdjust", "0.752")!!.toDouble()
-            rollingAdjust   = getString("rollingAdjust", "0.00421")!!.toDouble()
+            rollingAdjust   = getString("rollingAdjust", "0.0021")!!.toDouble()
             courseLength    = getString("courseLength", "11800")!!.toDouble()
-            courseHeight    = getString("courseHeight", "635")!!.toDouble()
-            courseName      = getString("courseName", " ").toString()
+            courseHeight    = getString("courseHeight", "676")!!.toDouble()
+            courseName      = getString("courseName", "ヤビツ峠（表）").toString()
 
             // 各TextEditにも設定してやる
             bodyWeightEdit.setText(bodyWeight.toString())
             bodyHeightEdit.setText(bodyHeight.toString())
             bikeWeightEdit.setText(bikeWeight.toString())
-            avePowerEdit.setText(avePower.toString())
+            avePowerEdit.setText(avePower.toInt().toString())
             goalTimeHourEdit.setText(goalTimeHour.toString())
             goalTimeMinEdit.setText(goalTimeMin.toString())
             goalTimeSecEdit.setText(goalTimeSec.toString())
             posAdjustEdit.setText(blacketAdjust.toString())
             highAdjustEdit.setText(highAdjust.toString())
             rollingAdjustEdit.setText(rollingAdjust.toString())
-            courseLengthEdit.setText(courseLength.toString())
-            courseHeightEdit.setText(courseHeight.toString())
+            courseLengthEdit.setText(courseLength.toInt().toString())
+            courseHeightEdit.setText(courseHeight.toInt().toString())
             courseNameText.setText(courseName)
 
             setGradeText()
@@ -324,7 +324,7 @@ class MainActivity : AppCompatActivity() {
         val p1: Double
         val p2: Double
         val p3: Double
-        var p : Double
+        val p : Double
         val goalTime: Int
 
         // まずEditTextからローカル変数に
@@ -342,23 +342,79 @@ class MainActivity : AppCompatActivity() {
 
         p = (p1+p2+p3) * courseLength/goalTime * 9.81
 
-        p = round(p*10) /10
+//        p = round(p*10) /10
 
         // 書き込み ＆ ハイライト
-        avePowerEdit.setText(p.toString())
+        avePowerEdit.setText(p.toInt().toString())
         highlightEdit (avePowerEdit)
+    }
+
+
+    // 指定したバイク重量、体重からゴールタイムを「秒」で返す
+    // インチキNewton法のために用意してみた
+    private fun calcGoalTime(bodyW: Double, bikeW:Double): Int {
+        val w: Double
+
+        val a: Double
+        val c: Double
+        val c27: Double
+        val b3: Double
+        val t: Double
+
+
+        // まずEditTextからローカル変数に
+        loadDataFromEdit()
+
+        w = bodyW + bikeW
+        a = -9.81 * courseLength / avePower.toDouble() * (w * cos(asin(courseHeight / courseLength)) * rollingAdjust + w * courseHeight / courseLength)
+        c = -9.81 * Math.pow(
+            courseLength,
+            3.0
+        ) / avePower.toDouble() * blacketAdjust * highAdjust * fujii * Math.pow(
+            bodyW, 0.425
+        ) * Math.pow(bodyHeight, 0.725)
+
+        c27 = (27 * c + 2 * Math.pow(a, 3.0)) / 54
+        b3 = -Math.pow(a, 2.0) / 9
+        t = Math.pow(
+            -c27 + sqrt(c27 * c27 + b3 * b3 * b3),
+            1.0 / 3.0
+        ) + Math.pow(-c27 - sqrt(c27 * c27 + b3 * b3 * b3), 1.0 / 3.0) - a / 3
+
+        return t.toInt()
     }
 
     // 体重計算・Edit更新
     private fun recalcBodyWeight() {
         var w: Double
+        var w2: Double
         val goalTime: Int
+        var goalTime2: Int
 
         // まずEditTextからローカル変数に
         loadDataFromEdit()
-        goalTime = goalTimeHour*3600 + goalTimeMin*60 + goalTimeSec
-        w = avePower * goalTime / (courseHeight*9.81) * weightRatio - bikeWeight
 
+        // まともに方程式は解けないので、重力抵抗のみで近似計算
+        goalTime = goalTimeHour*3600 + goalTimeMin*60 + goalTimeSec
+        w = avePower.toDouble() * goalTime / (courseHeight*9.81) * weightRatio - bikeWeight
+
+
+        // なんとなく少なめに出るみたいなので、0.05単位で5kgくらい増やしてみるインチキ計算
+        // 体重を増やしていくと、いずれ当初タイムを超えるはずなので、そこで打ち切って正解とする
+        // 失敗した場合に備え、+5kg（＝100ループ）でやめる
+        w2 = w
+        while (w2 < w+15.0) {
+            goalTime2 = calcGoalTime(w2, bikeWeight)
+
+            // 体重を増やしていって、当初のタイムを超えたらそこで終わり
+            if (goalTime2>=goalTime) {
+                w = w2
+                break
+            }
+            w2 += 0.1
+        }
+
+        // とりあえず、小数点1桁で丸める
         w = round(w*10) /10
 
         // 書き込み ＆ ハイライト
@@ -374,14 +430,35 @@ class MainActivity : AppCompatActivity() {
     // Bike重量計算・Edit更新
     private fun recalcBikeWeight() {
         var w: Double
+        var w2: Double
         val goalTime: Int
+        var goalTime2: Int
 
         // まずEditTextからローカル変数に
         loadDataFromEdit()
-        goalTime = goalTimeHour*3600 + goalTimeMin*60 + goalTimeSec
-        w = avePower * goalTime / (courseHeight*9.81) * weightRatio - bodyWeight
 
-        w = round( w*10 ) /10
+        // まともに方程式は解けないので、重力抵抗のみで近似計算
+        goalTime = goalTimeHour*3600 + goalTimeMin*60 + goalTimeSec
+        w = avePower.toDouble() * goalTime / (courseHeight*9.81) * weightRatio - bodyWeight
+
+
+        // なんとなく少なめに出るみたいなので、0.05単位で5kgくらい増やしてみるインチキ計算
+        // 体重を増やしていくと、いずれ当初タイムを超えるはずなので、そこで打ち切って正解とする
+        // 失敗した場合に備え、+5kg（＝100ループ）でやめる
+        w2 = w
+        while (w2 < w+10.0) {
+            goalTime2 = calcGoalTime(bodyWeight, w2)
+
+            // 体重を増やしていって、当初のタイムを超えたらそこで終わり
+            if (goalTime2>=goalTime) {
+                w = w2
+                break
+            }
+            w2 += 0.05
+        }
+
+        // とりあえず、小数点1桁で丸める
+        w = round(w*10) /10
 
         // 書き込み ＆ ハイライト
         bikeWeightEdit.setText(w.toString())
@@ -412,13 +489,12 @@ class MainActivity : AppCompatActivity() {
         loadDataFromEdit()
 
         w = bodyWeight + bikeWeight
-        a = -9.81 * courseLength / avePower * (w * cos(asin(courseHeight / courseLength)) * rollingAdjust + w * courseHeight / courseLength)
+        a = -9.81 * courseLength / avePower.toDouble() * (w * cos(asin(courseHeight / courseLength)) * rollingAdjust + w * courseHeight / courseLength)
         c = -9.81 * Math.pow(
             courseLength,
             3.0
-        ) / avePower * blacketAdjust * highAdjust * fujii * Math.pow(
-            bodyWeight,
-            0.425
+        ) / avePower.toDouble() * blacketAdjust * highAdjust * fujii * Math.pow(
+            bodyWeight, 0.425
         ) * Math.pow(bodyHeight, 0.725)
 
         c27 = (27 * c + 2 * Math.pow(a, 3.0)) / 54
