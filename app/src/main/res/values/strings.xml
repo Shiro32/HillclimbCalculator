@@ -11,11 +11,11 @@
     <string name="bikeWeight_hint">バイク</string>
 
     <string name="goalTime_text">ゴールタイム</string>
-    <string name="goalTimeHour_hint">時間</string>
+    <string name="goalTimeHour_hint">0</string>
     <string name="goalTimeHour_unit">時間</string>
-    <string name="goalTimeMin_hint">分</string>
+    <string name="goalTimeMin_hint">0</string>
     <string name="goalTimeMin_unit">分</string>
-    <string name="goalTimeSec_hint">秒</string>
+    <string name="goalTimeSec_hint">0</string>
     <string name="goalTimeSec_unit">秒</string>
     <string name="recalcBtn">計算</string>
 
@@ -23,7 +23,7 @@
     <string name="posAdjuster_hint">1.25程度</string>
 
     <string name="highAdjuster_text">高地補正</string>
-    <string name="highAdjuster_hint">0.725程度</string>
+    <string name="highAdjuster_hint">0</string>
 
     <string name="rollingAdjuster_text">転がり係数</string>
     <string name="rollingAdjuster_hint">0.00421</string>
@@ -106,4 +106,14 @@
     <string name="tireTL">TL</string>
     <string name="tirePressHelp">※上記の転がり抵抗測定時の空気圧</string>
     <string name="posAeroHint">まず使わないと思いますが・・・</string>
+    <string name="graphBodyWeightLabel">体重</string>
+    <string name="powerAnalyzeBtn">分析</string>
+    <string name="graphBikeWeightLabel">車重</string>
+    <string name="graphTimeLabel">タイム</string>
+    <string name="graphRollingLabel">転がり</string>
+    <string name="graphBodyWeightUnitLabel">kg</string>
+    <string name="graphBikeWeightUnitLabel">kg</string>
+    <string name="graphTimeUnitLabel">分</string>
+    <string name="graphHeaderText">パワーの内訳です。\n空気抵抗・転がり抵抗・重力抵抗の３つの比率が分かります（ヒルクライムではほとんど重力抵抗ですね）\n下部のバーを動かして変化させてみてください。</string>
+
 </resources>

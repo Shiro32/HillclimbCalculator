@@ -272,12 +272,24 @@
 
                     <Button
                         android:id="@+id/recalcPowerBtn"
-                        android:layout_width="wrap_content"
+                        android:layout_width="70dp"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="8dp"
                         android:background="@android:drawable/btn_default_small"
                         android:text="@string/recalcBtn"
                         app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/avePowerEdit" />
+
+                    <Button
+                        android:id="@+id/analyzePowerBtn"
+                        android:layout_width="50dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginRight="8dp"
+                        android:background="@android:drawable/btn_default_small"
+                        android:text="@string/powerAnalyzeBtn"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/recalcPowerBtn"
                         app:layout_constraintTop_toTopOf="@+id/avePowerEdit" />
 
 

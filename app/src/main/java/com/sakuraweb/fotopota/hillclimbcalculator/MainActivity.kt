@@ -21,14 +21,34 @@ import kotlin.math.sqrt
 val REQUEST_CODE_COURSE_SELECT = 1
 val REQUEST_CODE_POS_SELECT = 2
 val REQUEST_CODE_TIRE_SELECT = 3
+val REQUEST_CODE_POWER_SELECT = 4
+
+var bodyWeight = 0.0
+var bodyHeight = 0.0
+var bikeWeight = 0.0
+var avePower = 0.0
+var goalTimeHour = 0
+var goalTimeMin = 0
+var goalTimeSec = 0
+var blacketAdjust = 0.0
+var highAdjust = 0.0
+var rollingAdjust = 0.0
+var courseHeight = 635.0
+var courseLength = 11800.0
+var courseName = " "
+
+// 以下の２つは計算上の定数
+val fujii: Double = 0.00007638
+val weightRatio: Double = 0.839827861
 
 // メイン画面クラス
 // 実際にはRealmデータベースの初期化処理などがあるため、これが最初の実行コードではない
 // 最初に実行されるのはStartApplicationクラス
-class MainActivity : AppCompatActivity() {
+open class MainActivity : AppCompatActivity() {
 
     // 計算用に各種要素はローカル変数で持つ
     // TextEdit入力途中の人に対応すべく、結局は、各計算時にTextEdit→ローカル変数への読み込みをやる
+/*
     private var bodyWeight = 0.0
     private var bodyHeight = 0.0
     private var bikeWeight = 0.0
@@ -42,10 +62,13 @@ class MainActivity : AppCompatActivity() {
     private var courseHeight = 635.0
     private var courseLength = 11800.0
     private var courseName = " "
+*/
 
+/*
     // 以下の２つは計算上の定数
     private val fujii: Double = 0.00007638
     private val weightRatio: Double = 0.839827861
+*/
 
     // 入力時のキーボード制御（隠したりするやつ）のため
     private lateinit var defaultBack: Drawable
@@ -100,6 +123,29 @@ class MainActivity : AppCompatActivity() {
         tireSelectBtn.setOnClickListener() {
             val intent = Intent( this , TireListActivity::class.java)
             startActivityForResult(intent, REQUEST_CODE_TIRE_SELECT)
+        }
+
+        // パワー分析ボタンのリスナ
+        analyzePowerBtn.setOnClickListener() {
+            val intent = Intent(this,GraphActivity::class.java)
+
+            loadDataFromEdit()
+            // intentで送るのではなく、グローバル変数で引き渡す
+/*
+            intent.putExtra("bodyWeight", bodyWeight.toDouble())
+            intent.putExtra("bodyHeight", bodyHeight.toDouble())
+            intent.putExtra("bikeWeight", bikeWeight.toDouble())
+            intent.putExtra("avePower", avePower.toDouble())
+            intent.putExtra("goalTimeHour", goalTimeHour.toInt())
+            intent.putExtra("goalTimeMin", goalTimeMin.toInt())
+            intent.putExtra("goalTimeSec", goalTimeSec.toInt())
+            intent.putExtra("blacketAdjust", blacketAdjust.toDouble())
+            intent.putExtra("highAdjust", highAdjust.toDouble())
+            intent.putExtra("rollingAdjust", rollingAdjust.toDouble())
+            intent.putExtra("courseLength", courseLength.toDouble())
+            intent.putExtra("courseHeight", courseHeight.toDouble())
+ */
+            startActivityForResult(intent, REQUEST_CODE_POWER_SELECT)
         }
         // copyrightメッセージにURLを埋め込む
         copyRightText.setText(Html.fromHtml("v2.0 Copyright ©2020 Shiro, <a href=\"http://fotopota.sakuraweb.com\">フォトポタ日記2.0</a>"))
