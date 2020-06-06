@@ -22,6 +22,7 @@ val REQUEST_CODE_COURSE_SELECT = 1
 val REQUEST_CODE_POS_SELECT = 2
 val REQUEST_CODE_TIRE_SELECT = 3
 val REQUEST_CODE_POWER_SELECT = 4
+val REQUEST_CODE_TIME_SELECT = 5
 
 var bodyWeight = 0.0
 var bodyHeight = 0.0
@@ -128,27 +129,19 @@ open class MainActivity : AppCompatActivity() {
         // パワー分析ボタンのリスナ
         analyzePowerBtn.setOnClickListener() {
             val intent = Intent(this,GraphActivity::class.java)
-
             loadDataFromEdit()
-            // intentで送るのではなく、グローバル変数で引き渡す
-/*
-            intent.putExtra("bodyWeight", bodyWeight.toDouble())
-            intent.putExtra("bodyHeight", bodyHeight.toDouble())
-            intent.putExtra("bikeWeight", bikeWeight.toDouble())
-            intent.putExtra("avePower", avePower.toDouble())
-            intent.putExtra("goalTimeHour", goalTimeHour.toInt())
-            intent.putExtra("goalTimeMin", goalTimeMin.toInt())
-            intent.putExtra("goalTimeSec", goalTimeSec.toInt())
-            intent.putExtra("blacketAdjust", blacketAdjust.toDouble())
-            intent.putExtra("highAdjust", highAdjust.toDouble())
-            intent.putExtra("rollingAdjust", rollingAdjust.toDouble())
-            intent.putExtra("courseLength", courseLength.toDouble())
-            intent.putExtra("courseHeight", courseHeight.toDouble())
- */
             startActivityForResult(intent, REQUEST_CODE_POWER_SELECT)
         }
+
+        // タイム分析ボタンのリスナ
+        analyzeTimeBtn.setOnClickListener() {
+            val intent = Intent(this, TimeGraphActivity::class.java)
+            loadDataFromEdit()
+            startActivityForResult(intent, REQUEST_CODE_TIME_SELECT)
+        }
+
         // copyrightメッセージにURLを埋め込む
-        copyRightText.setText(Html.fromHtml("v2.0 Copyright ©2020 Shiro, <a href=\"http://fotopota.sakuraweb.com\">フォトポタ日記2.0</a>"))
+        copyRightText.setText(Html.fromHtml("v2.2 Copyright ©2020 Shiro, <a href=\"http://fotopota.sakuraweb.com\">フォトポタ日記2.0</a>"))
         copyRightText.movementMethod = LinkMovementMethod.getInstance()
 
         // privacy policyにURLを埋め込む

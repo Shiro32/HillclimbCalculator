@@ -78,6 +78,8 @@
                         android:id="@+id/bodyWeightEdit"
                         android:layout_width="100dp"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="14dp"
+                        android:layout_marginLeft="14dp"
                         android:layout_marginTop="8dp"
                         android:ems="10"
                         android:gravity="right"
@@ -85,7 +87,7 @@
                         android:inputType="numberDecimal"
                         android:selectAllOnFocus="true"
                         android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                        app:layout_constraintStart_toEndOf="@+id/bodyWeightText"
+                        app:layout_constraintStart_toEndOf="@+id/bikeWeightText"
                         app:layout_constraintTop_toBottomOf="@+id/topCaption" />
 
                     <TextView
@@ -174,8 +176,10 @@
 
                     <EditText
                         android:id="@+id/goalTimeHourEdit"
-                        android:layout_width="35dp"
+                        android:layout_width="20sp"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginLeft="8dp"
                         android:ems="10"
                         android:gravity="right"
                         android:hint="@string/goalTimeHour_hint"
@@ -183,8 +187,7 @@
                         android:selectAllOnFocus="true"
                         android:textAppearance="@style/TextAppearance.AppCompat.Large"
                         app:layout_constraintBaseline_toBaselineOf="@+id/goalTimeText"
-                        app:layout_constraintStart_toEndOf="@+id/goalTimeText"
-                        app:layout_constraintStart_toStartOf="@+id/avePowerEdit" />
+                        app:layout_constraintStart_toEndOf="@+id/goalTimeText" />
 
                     <TextView
                         android:id="@+id/goalTimeHourUnitText"
@@ -241,9 +244,10 @@
 
                     <Button
                         android:id="@+id/recalcTimeBtn"
-                        android:layout_width="wrap_content"
+                        android:layout_width="70dp"
                         android:layout_height="0dp"
-                        android:layout_marginEnd="8dp"
+                        android:layout_marginEnd="4dp"
+                        android:layout_marginRight="4dp"
                         android:background="@android:drawable/btn_default_small"
                         android:text="@string/recalcBtn"
                         app:layout_constraintBottom_toBottomOf="@+id/goalTimeSecEdit"
@@ -252,9 +256,10 @@
 
                     <Button
                         android:id="@+id/recalcBodyWeightBtn"
-                        android:layout_width="wrap_content"
+                        android:layout_width="124dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="8dp"
+                        android:layout_marginEnd="4dp"
+                        android:layout_marginRight="4dp"
                         android:background="@android:drawable/btn_default_small"
                         android:text="@string/recalcBtn"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -262,9 +267,10 @@
 
                     <Button
                         android:id="@+id/recalcBikeWeightBtn"
-                        android:layout_width="wrap_content"
+                        android:layout_width="124dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="8dp"
+                        android:layout_marginEnd="4dp"
+                        android:layout_marginRight="4dp"
                         android:background="@android:drawable/btn_default_small"
                         android:text="@string/recalcBtn"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -274,7 +280,8 @@
                         android:id="@+id/recalcPowerBtn"
                         android:layout_width="70dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="8dp"
+                        android:layout_marginEnd="4dp"
+                        android:layout_marginRight="4dp"
                         android:background="@android:drawable/btn_default_small"
                         android:text="@string/recalcBtn"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -284,13 +291,23 @@
                         android:id="@+id/analyzePowerBtn"
                         android:layout_width="50dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="8dp"
-                        android:layout_marginRight="8dp"
+                        android:layout_marginEnd="4dp"
+                        android:layout_marginRight="4dp"
                         android:background="@android:drawable/btn_default_small"
                         android:text="@string/powerAnalyzeBtn"
-                        app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintEnd_toStartOf="@+id/recalcPowerBtn"
                         app:layout_constraintTop_toTopOf="@+id/avePowerEdit" />
+
+                    <Button
+                        android:id="@+id/analyzeTimeBtn"
+                        android:layout_width="50dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="4dp"
+                        android:layout_marginRight="4dp"
+                        android:background="@android:drawable/btn_default_small"
+                        android:text="@string/powerAnalyzeBtn"
+                        app:layout_constraintEnd_toStartOf="@+id/recalcTimeBtn"
+                        app:layout_constraintTop_toTopOf="@+id/goalTimeSecEdit" />
 
 
                     <!-- - - - - - - - - - - - - - - - - -�㉺�̕����� - - - - - - - - - - - - - - - - - -->
@@ -424,11 +441,11 @@
 
                     <Button
                         android:id="@+id/courseSelectBtn"
-                        android:layout_width="0dp"
+                        android:layout_width="124dp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="24dp"
-                        android:layout_marginEnd="8dp"
-                        android:layout_marginRight="8dp"
+                        android:layout_marginEnd="4dp"
+                        android:layout_marginRight="4dp"
                         android:background="@android:drawable/btn_default_small"
                         android:paddingLeft="10dp"
                         android:paddingRight="10dp"
@@ -560,10 +577,12 @@
                         android:id="@+id/fightImage"
                         android:layout_width="81dp"
                         android:layout_height="117dp"
+                        android:layout_marginEnd="1dp"
+                        android:layout_marginRight="1dp"
                         android:adjustViewBounds="false"
                         android:cropToPadding="false"
                         android:scaleType="fitEnd"
-                        app:layout_constraintBottom_toTopOf="@+id/copyRightText"
+                        app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:srcCompat="@drawable/fight_man" />
 

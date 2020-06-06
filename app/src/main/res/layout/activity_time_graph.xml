@@ -1,0 +1,369 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/timeGraphBase"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:focusableInTouchMode="true"
+    tools:context=".TimeGraphActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:title="タイム分析グラフ" />
+
+    <TextView
+        android:id="@+id/timeGraphHeaderText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:text="@string/timeGraphHeaderText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView2"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="2dp"
+        app:cardBackgroundColor="@color/colorCourseList"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="2dp"
+        app:cardUseCompatPadding="true"
+        app:layout_constraintBottom_toTopOf="@+id/cardView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/timeGraphHeaderText">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/timeGraphTimeText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="4dp"
+                android:text="title"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/timeGraphGoalTimeLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/timeGraphTimeLabel"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                app:layout_constraintBaseline_toBaselineOf="@+id/timeGraphTimeText"
+                app:layout_constraintEnd_toStartOf="@+id/timeGraphTimeText" />
+
+            <com.github.mikephil.charting.charts.PieChart
+                android:id="@+id/chart"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginBottom="8dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/timeGraphTimeText" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardBackgroundColor="@color/colorCourseList"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="2dp"
+        app:cardUseCompatPadding="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cardView2">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <SeekBar
+                android:id="@+id/timeGraphBodyWeightBar"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="@+id/timeGraphBodyWeightLabel"
+                app:layout_constraintEnd_toStartOf="@+id/timeGraphRollingText"
+                app:layout_constraintStart_toEndOf="@+id/timeGraphBodyWeightLabel"
+                app:layout_constraintStart_toStartOf="@+id/timeGraphRollingBar" />
+
+            <TextView
+                android:id="@+id/timeGraphBodyWeightLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginLeft="4dp"
+                android:layout_marginTop="16dp"
+                android:text="@string/graphBodyWeightLabel"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/timeGraphBodyWeightMinLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
+                android:text="10"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                android:textSize="8sp"
+                app:layout_constraintBottom_toTopOf="@+id/timeGraphBodyWeightBar"
+                app:layout_constraintStart_toStartOf="@+id/timeGraphBodyWeightBar" />
+
+            <TextView
+                android:id="@+id/timeGraphBodyWeightMaxLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:layout_marginRight="16dp"
+                android:text="100"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                android:textSize="8sp"
+                app:layout_constraintBottom_toTopOf="@+id/timeGraphBodyWeightBar"
+                app:layout_constraintEnd_toEndOf="@+id/timeGraphBodyWeightBar" />
+
+            <TextView
+                android:id="@+id/timeGraphBodyWeightUnit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="4dp"
+                android:layout_marginRight="4dp"
+                android:text="@string/graphBodyWeightUnitLabel"
+                app:layout_constraintBaseline_toBaselineOf="@+id/timeGraphBodyWeightLabel"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <TextView
+                android:id="@+id/timeGraphBodyWeightText"
+                android:layout_width="30sp"
+                android:layout_height="wrap_content"
+                android:ems="10"
+
+                android:gravity="right"
+                android:text="0"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                app:layout_constraintBottom_toBottomOf="@+id/timeGraphBodyWeightLabel"
+                app:layout_constraintEnd_toStartOf="@+id/timeGraphBodyWeightUnit" />
+
+            <SeekBar
+                android:id="@+id/timeGraphBikeWeightBar"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="@+id/timeGraphBikeWeightLabel"
+                app:layout_constraintEnd_toStartOf="@+id/timeGraphRollingText"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toEndOf="@+id/timeGraphBikeWeightLabel"
+                app:layout_constraintStart_toStartOf="@+id/timeGraphRollingBar" />
+
+            <TextView
+                android:id="@+id/timeGraphBikeWeightLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginLeft="4dp"
+                android:layout_marginTop="24dp"
+                android:text="@string/graphBikeWeightLabel"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/timeGraphBodyWeightLabel" />
+
+            <TextView
+                android:id="@+id/timeGraphBikeWeightMinLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
+                android:text="2"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                android:textSize="8sp"
+                app:layout_constraintBottom_toTopOf="@+id/timeGraphBikeWeightBar"
+                app:layout_constraintStart_toStartOf="@+id/timeGraphBikeWeightBar" />
+
+            <TextView
+                android:id="@+id/timeGraphBikeWeightMaxLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:layout_marginRight="16dp"
+                android:text="20"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                android:textSize="8sp"
+                app:layout_constraintBottom_toTopOf="@+id/timeGraphBikeWeightBar"
+                app:layout_constraintEnd_toEndOf="@+id/timeGraphBikeWeightBar" />
+
+            <TextView
+                android:id="@+id/timeGraphBikeWeightUnit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="4dp"
+                android:layout_marginRight="4dp"
+                android:text="@string/graphBikeWeightUnitLabel"
+                app:layout_constraintBaseline_toBaselineOf="@+id/timeGraphBikeWeightLabel"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <TextView
+                android:id="@+id/timeGraphBikeWeightText"
+                android:layout_width="30sp"
+                android:layout_height="wrap_content"
+                android:ems="10"
+
+                android:gravity="right"
+                android:text="0"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                app:layout_constraintBottom_toBottomOf="@+id/timeGraphBikeWeightLabel"
+                app:layout_constraintEnd_toStartOf="@+id/timeGraphBikeWeightUnit" />
+
+            <SeekBar
+                android:id="@+id/timeGraphPowerBar"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="@+id/timeGraphPowerLabel"
+                app:layout_constraintEnd_toStartOf="@+id/timeGraphRollingText"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toEndOf="@+id/timeGraphRollingLabel"
+                app:layout_constraintStart_toStartOf="@+id/timeGraphRollingBar" />
+
+            <TextView
+                android:id="@+id/timeGraphPowerLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginLeft="4dp"
+                android:layout_marginTop="24dp"
+                android:text="@string/graphPowerLabel"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/timeGraphBikeWeightLabel" />
+
+            <TextView
+                android:id="@+id/timeGraphPowerMinLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
+                android:text="100"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                android:textSize="8sp"
+                app:layout_constraintBottom_toTopOf="@+id/timeGraphPowerBar"
+                app:layout_constraintStart_toStartOf="@+id/timeGraphPowerBar" />
+
+            <TextView
+                android:id="@+id/timeGraphPowerMaxLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:layout_marginRight="16dp"
+                android:text="400"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                android:textSize="8sp"
+                app:layout_constraintBottom_toTopOf="@+id/timeGraphPowerBar"
+                app:layout_constraintEnd_toEndOf="@+id/timeGraphPowerBar" />
+
+            <TextView
+                android:id="@+id/timeGraphPowerUnit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="4dp"
+                android:layout_marginRight="4dp"
+                android:text="@string/graphPowerUnitLabel"
+                app:layout_constraintBaseline_toBaselineOf="@+id/timeGraphPowerLabel"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <TextView
+                android:id="@+id/timeGraphPowerText"
+                android:layout_width="30sp"
+                android:layout_height="wrap_content"
+                android:ems="10"
+
+                android:gravity="right"
+                android:text="0"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                app:layout_constraintBottom_toBottomOf="@+id/timeGraphPowerLabel"
+                app:layout_constraintEnd_toStartOf="@+id/timeGraphPowerUnit" />
+
+            <SeekBar
+                android:id="@+id/timeGraphRollingBar"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="@+id/timeGraphRollingLabel"
+                app:layout_constraintEnd_toStartOf="@+id/timeGraphRollingText"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toEndOf="@+id/timeGraphRollingLabel" />
+
+            <TextView
+                android:id="@+id/timeGraphRollingLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginLeft="4dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginBottom="8dp"
+                android:text="@string/graphRollingLabel"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/timeGraphPowerLabel" />
+
+            <TextView
+                android:id="@+id/timeGraphRollingMinLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
+                android:text="0.001"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                android:textSize="8sp"
+                app:layout_constraintBottom_toTopOf="@+id/timeGraphRollingBar"
+                app:layout_constraintStart_toStartOf="@+id/timeGraphRollingBar" />
+
+            <TextView
+                android:id="@+id/timeGraphRollingMaxLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:layout_marginRight="16dp"
+                android:text="0.005"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                android:textSize="8sp"
+                app:layout_constraintBottom_toTopOf="@+id/timeGraphRollingBar"
+                app:layout_constraintEnd_toEndOf="@+id/timeGraphRollingBar" />
+
+            <TextView
+                android:id="@+id/timeGraphRollingText"
+                android:layout_width="50sp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="4dp"
+
+                android:layout_marginRight="4dp"
+                android:ems="10"
+                android:gravity="right"
+                android:text="000"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                app:layout_constraintBottom_toBottomOf="@+id/timeGraphRollingLabel"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

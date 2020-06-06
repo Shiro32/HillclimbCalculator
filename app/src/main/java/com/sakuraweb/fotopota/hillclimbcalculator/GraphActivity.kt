@@ -4,7 +4,6 @@ import android.content.Context
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.MotionEvent
 import android.view.inputmethod.InputMethodManager
 import android.widget.SeekBar
 import com.github.mikephil.charting.data.Entry
@@ -12,35 +11,31 @@ import com.github.mikephil.charting.data.PieData
 import com.github.mikephil.charting.data.PieDataSet
 import com.github.mikephil.charting.utils.ColorTemplate
 import kotlinx.android.synthetic.main.activity_graph.*
-import kotlinx.android.synthetic.main.activity_main.*
 import kotlin.math.asin
 import kotlin.math.cos
 
-
-var gPower: Int = 0
-var rPower: Int = 0
-var aPower: Int = 0
-var tPower: Int = 0
+// 各パワー成分はグローバル変数で受け渡し
+private var gPower: Int = 0
+private var rPower: Int = 0
+private var aPower: Int = 0
+private var tPower: Int = 0
 
 class GraphActivity : AppCompatActivity() {
 
-    private lateinit var inputMethodManager: InputMethodManager
-
+    // スタートアップ
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_graph)
-
-        inputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager        // 入力制御用に入れておく
 
         // 体重バー
         // 10～100kgにするため、0～90を+10オフセットして使う
         graphBodyWeightBar.max = 90
         graphBodyWeightBar.progress = (bodyWeight-10).toInt()
-        graphBodyWeightEdit.setText(bodyWeight.toString())
+        graphBodyWeightText.setText(bodyWeight.toString())
 
         graphBodyWeightBar.setOnSeekBarChangeListener(object: SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
-                graphBodyWeightEdit.setText((progress+10).toString())
+                graphBodyWeightText.setText((progress+10).toString())
                 drawGraph()
             }
 
@@ -52,11 +47,11 @@ class GraphActivity : AppCompatActivity() {
         // 2～20kgにするため、0～18を+2オフセットして使う
         graphBikeWeightBar.max = 20
         graphBikeWeightBar.progress = (bikeWeight-2).toInt()
-        graphBikeWeightEdit.setText(bikeWeight.toString())
+        graphBikeWeightText.setText(bikeWeight.toString())
 
         graphBikeWeightBar.setOnSeekBarChangeListener(object: SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
-                graphBikeWeightEdit.setText((progress+2).toString())
+                graphBikeWeightText.setText((progress+2).toString())
                 drawGraph()
             }
 
@@ -68,11 +63,11 @@ class GraphActivity : AppCompatActivity() {
         // 0.001～0.005にするため、0～40にして、+10　÷10000して使う
         graphRollingBar.max = 40
         graphRollingBar.progress = (rollingAdjust*10000-10).toInt()
-        graphRollingEdit.setText(rollingAdjust.toString())
+        graphRollingText.setText(rollingAdjust.toString())
 
         graphRollingBar.setOnSeekBarChangeListener(object: SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
-                graphRollingEdit.setText(((progress+10).toDouble()/10000).toString())
+                graphRollingText.setText(((progress+10).toDouble()/10000).toString())
                 drawGraph()
             }
 
@@ -84,11 +79,11 @@ class GraphActivity : AppCompatActivity() {
         // 5～180分にするため、+5オフセットして使う
         graphTimeBar.max = 175
         graphTimeBar.progress = goalTimeHour*60+ goalTimeMin - 5
-        graphTimeEdit.setText((goalTimeHour*60+ goalTimeMin).toString())
+        graphTimeText.setText((goalTimeHour*60+ goalTimeMin).toString())
 
         graphTimeBar.setOnSeekBarChangeListener(object: SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
-                graphTimeEdit.setText((progress+5).toString())
+                graphTimeText.setText((progress+5).toString())
                 drawGraph()
             }
 
@@ -96,17 +91,33 @@ class GraphActivity : AppCompatActivity() {
             override fun onStopTrackingTouch(seekBar: SeekBar?) { }
         })
 
-        // まずは1個書いてみよう
+        // 標高差バー
+        graphHeightBar.max = 3000
+        graphHeightBar.progress = courseHeight.toInt()
+        graphHeightText.setText(courseHeight.toInt().toString())
+
+        graphHeightBar.setOnSeekBarChangeListener(object: SeekBar.OnSeekBarChangeListener {
+            override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
+                graphHeightText.setText(progress.toString())
+                drawGraph()
+            }
+
+            override fun onStartTrackingTouch(seekBar: SeekBar?) { }
+            override fun onStopTrackingTouch(seekBar: SeekBar?) { }
+        })
+
+        // 各種バーの初期設定完了
+        // グラフの初期化＆描画
         initGraph()
         drawGraph()
     }
 
     // 一応作ったけど、誰も呼び出してない
     fun setSeekBar() {
-        graphBikeWeightBar.progress = graphBikeWeightEdit.text.toString().toInt()
-        graphBodyWeightBar.progress = graphBodyWeightEdit.text.toString().toInt()
-        graphRollingBar.progress    = (graphRollingEdit.text.toString().toDouble()*10000).toInt()
-        graphTimeBar.progress       = graphTimeEdit.text.toString().toInt()
+        graphBikeWeightBar.progress = graphBikeWeightText.text.toString().toInt()
+        graphBodyWeightBar.progress = graphBodyWeightText.text.toString().toInt()
+        graphRollingBar.progress    = (graphRollingText.text.toString().toDouble()*10000).toInt()
+        graphTimeBar.progress       = graphTimeText.text.toString().toInt()
     }
 
     // 円グラフを描くための準備
@@ -126,13 +137,13 @@ class GraphActivity : AppCompatActivity() {
 
         // レジェンド
         chart.legend.isEnabled = true
-        chart.legend.textSize = 14F
+        chart.legend.textSize = 12F
         chart.setDescription("")
 
         // 真ん中の文字
         chart.setDrawCenterText(true)
         chart.centerText = "サンプルテキストです！"
-        chart.setCenterTextSize(30f)
+        chart.setCenterTextSize(25f)
 
     }
 
@@ -141,10 +152,11 @@ class GraphActivity : AppCompatActivity() {
     // 転がり、空気、重力の３つのグローバル変数に格納する
     private fun calcPowers() {
         // バーの数字を読む
-        bodyWeight = graphBodyWeightEdit.text.toString().toDouble()
-        bikeWeight = graphBikeWeightEdit.text.toString().toDouble()
-        rollingAdjust = graphRollingEdit.text.toString().toDouble()
-        val goalTime = graphTimeEdit.text.toString().toLong()*60 // 分で登録してあるため
+        bodyWeight = graphBodyWeightText.text.toString().toDouble()
+        bikeWeight = graphBikeWeightText.text.toString().toDouble()
+        rollingAdjust = graphRollingText.text.toString().toDouble()
+        courseHeight = graphHeightText.text.toString().toDouble()
+        val goalTime = graphTimeText.text.toString().toLong()*60 // 分で登録してあるため
 
 
         val w: Double = bodyWeight + bikeWeight
@@ -179,6 +191,8 @@ class GraphActivity : AppCompatActivity() {
         xVals.add("転がり抵抗")
         xVals.add("重力抵抗")
 
+        // 転がり抵抗が小さすぎるとバグるみたいなので、zeroサプレス
+        if (rPower*1000 < 3* tPower) {rPower = 0}
         yVals.add(Entry(aPower.toFloat(),0))
         yVals.add(Entry(rPower.toFloat(),1))
         yVals.add(Entry(gPower.toFloat(),2))
@@ -194,7 +208,7 @@ class GraphActivity : AppCompatActivity() {
         dataSet.setColors(colors)
 
         // 真ん中の文字
-        val speed = ((courseLength/graphTimeEdit.text.toString().toDouble())*60/1000).toInt()
+        val speed = ((courseLength/graphTimeText.text.toString().toDouble())*60/1000).toInt()
         chart.centerText = "${tPower.toInt().toString()}W\n${speed}km/h"
 
         // 数値表示？
@@ -204,13 +218,13 @@ class GraphActivity : AppCompatActivity() {
 //  data.setValueFormatter(PercentFormatter())
 
         // テキスト設定
-        data.setValueTextSize(15f)
-        data.setValueTextColor(Color.WHITE)
+        data.setValueTextSize(14f)
+        data.setValueTextColor(Color.BLACK)
 
         chart.data = data
         chart.invalidate()
 
- //       graphHeaderText.setText("${aPower}\n${rPower}\n${gPower}")
+//       graphHeaderText.setText("${aPower}\n${rPower}\n${gPower}")
     }
 
 

@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">ヒルクライム計算機</string>
     <string name="copyright_text">v1.0 Copyright ©2020 Shiro, <a href="http://fotopota.sakuraweb.com">フォトポタ日記2.0</a></string>
-    <string name="bodyWeight_text">ライダー体重</string>
+    <string name="bodyWeight_text">体重</string>
     <string name="bodyWeight_hint">体重</string>
     <string name="bodyWeight_unit">kg</string>
     <string name="bikeWeight_text">バイク重量</string>
@@ -10,7 +10,7 @@
     <string name="avePowet_unit">W</string>
     <string name="bikeWeight_hint">バイク</string>
 
-    <string name="goalTime_text">ゴールタイム</string>
+    <string name="goalTime_text">タイム</string>
     <string name="goalTimeHour_hint">0</string>
     <string name="goalTimeHour_unit">時間</string>
     <string name="goalTimeMin_hint">0</string>
@@ -114,6 +114,11 @@
     <string name="graphBodyWeightUnitLabel">kg</string>
     <string name="graphBikeWeightUnitLabel">kg</string>
     <string name="graphTimeUnitLabel">分</string>
-    <string name="graphHeaderText">パワーの内訳です。\n空気抵抗・転がり抵抗・重力抵抗の３つの比率が分かります（ヒルクライムではほとんど重力抵抗ですね）\n下部のバーを動かして変化させてみてください。</string>
-
+    <string name="graphHeaderText">空気抵抗・転がり抵抗・重力抵抗の比率が分かります\n下部のスライダを動かしてみてください。</string>
+    <string name="graphHeightLabel">標高差</string>
+    <string name="graphHeightUnitLabel">m</string>
+    <string name="timeGraphHeaderText">ゴールタイム達成時のパワー内訳が分かります。\n下のスライダを動かしてみてください。</string>
+    <string name="graphPowerLabel">パワー</string>
+    <string name="graphPowerUnitLabel">W</string>
+    <string name="timeGraphTimeLabel">ゴールタイム：</string>
 </resources>
