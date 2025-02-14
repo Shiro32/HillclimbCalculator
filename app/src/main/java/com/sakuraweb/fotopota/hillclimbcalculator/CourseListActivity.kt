@@ -43,10 +43,12 @@ class CourseListActivity : AppCompatActivity(), SetCourseListener {
         // 第2引数が投げる先のActivity。KOTLINじゃなくJAVAクラスで渡すため、::class.javaにする
 
         fab.setOnClickListener {
-            val intent = Intent(this, CourseEditActivity::class.java)
+            val intent: Intent = Intent(this, CourseEditActivity::class.java)
             startActivity(intent)
         }
 
+       
+        
 /*
 		fab.setOnClickListener { view ->
 			Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)

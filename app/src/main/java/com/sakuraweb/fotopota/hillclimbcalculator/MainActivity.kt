@@ -140,8 +140,9 @@ open class MainActivity : AppCompatActivity() {
             startActivityForResult(intent, REQUEST_CODE_TIME_SELECT)
         }
 
+        // TODO: もともとのTextViewにURLを埋め込むことができるみたいだぞ？　v2.3にしなくてはいけないし
         // copyrightメッセージにURLを埋め込む
-        copyRightText.setText(Html.fromHtml("v2.2 Copyright ©2020 Shiro, <a href=\"http://fotopota.sakuraweb.com\">フォトポタ日記2.0</a>"))
+        copyRightText.setText(Html.fromHtml("v2.6 Copyright ©2020 Shiro, <a href=\"http://fotopota.sakuraweb.com\">フォトポタ日記2.0</a>"))
         copyRightText.movementMethod = LinkMovementMethod.getInstance()
 
         // privacy policyにURLを埋め込む

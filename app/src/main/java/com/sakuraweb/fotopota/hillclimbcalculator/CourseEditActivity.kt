@@ -47,9 +47,6 @@ class CourseEditActivity : AppCompatActivity() {
             courseEditDeleteBtn.visibility = View.INVISIBLE
         }
 
-        // 画面フォーカス用に
-        inputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-
 
         // saveボタンのリスナ （強引にここに全部書く）
         courseEditSaveBtn.setOnClickListener {
